@@ -8,8 +8,8 @@ description: Genera el Technical Design Document + ADRs (formato MADR) + criteri
 ## Goal
 
 Produce a production-grade Technical Design Document (TDD) and its supporting Architecture
-Decision Records (ADRs, MADR format) — an artifact solid enough to take into a real company, not
-a course exercise. This is not a light draft generator.
+Decision Records (ADRs, MADR format) — thorough enough to guide real implementation and
+traceable enough to justify itself to a future maintainer. This is not a light draft generator.
 
 **This skill is conversational, not one-shot.** Never generate the full TDD in a single pass. Walk
 the user through each architecture decision one at a time, present real alternatives with

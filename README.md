@@ -4,8 +4,20 @@ Skills de agente instalables vía [skills.sh](https://www.skills.sh/).
 
 ## Instalación
 
+Este repo tiene más de una skill. `npx skills add adminoryslabs/Skills` abre un selector
+interactivo para elegir cuál(es) instalar — no instala todas automáticamente.
+
+Para instalar una skill puntual sin el selector:
+
 ```bash
-npx skills add adminoryslabs/Skills
+npx skills add adminoryslabs/Skills --skill generar-prd
+npx skills add adminoryslabs/Skills --skill generar-tech-design
+```
+
+Para instalar todas:
+
+```bash
+npx skills add adminoryslabs/Skills --skill '*'
 ```
 
 ## Skills disponibles
