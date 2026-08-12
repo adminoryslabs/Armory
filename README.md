@@ -4,23 +4,23 @@ Skills de agente instalables vía [skills.sh](https://www.skills.sh/).
 
 ## Instalación
 
-Este repo tiene más de una skill. `npx skills add adminoryslabs/Skills` abre un selector
+Este repo tiene más de una skill. `npx skills add adminoryslabs/Armory` abre un selector
 interactivo para elegir cuál(es) instalar — no instala todas automáticamente.
 
 Para instalar una skill puntual sin el selector:
 
 ```bash
-npx skills add adminoryslabs/Skills --skill generar-prd
-npx skills add adminoryslabs/Skills --skill generar-tech-design
-npx skills add adminoryslabs/Skills --skill revision-adversarial
-npx skills add adminoryslabs/Skills --skill generar-backlog
-npx skills add adminoryslabs/Skills --skill descomponer-multirepo
+npx skills add adminoryslabs/Armory --skill generar-prd
+npx skills add adminoryslabs/Armory --skill generar-tech-design
+npx skills add adminoryslabs/Armory --skill revision-adversarial
+npx skills add adminoryslabs/Armory --skill generar-backlog
+npx skills add adminoryslabs/Armory --skill descomponer-multirepo
 ```
 
 Para instalar todas:
 
 ```bash
-npx skills add adminoryslabs/Skills --skill '*'
+npx skills add adminoryslabs/Armory --skill '*'
 ```
 
 ## Skills disponibles
