@@ -102,6 +102,18 @@ look for a `CLAUDE.md` one folder above the current one.
    Any `SKILL.md` inside the bundle follows this catalog's frontmatter convention (`name`,
    `description` ending in an English "Use when..." clause) so it stays consistent if it's ever
    published or shared on its own.
+8. **Activate it for the person who just built it.** The README from step 7 is written for a
+   teammate setting this up later on their own machine — it does not, by itself, make the harness
+   work right now for the user in this session. Do everything that's safely automatable immediately:
+   - If a hook was decided in step 6, merge its entry into the current project's
+     `.claude/settings.json` (create the `hooks` key or matcher if missing — never overwrite or
+     drop any hook entries already there).
+   - If a rule was decided in step 6, add it to the current project's `CLAUDE.md` now, not just
+     describe it in the README.
+   - If the skill needs to live somewhere specific to be discoverable in this project (not just
+     inside the harness bundle folder), put it there too.
+   Tell the user exactly what got activated automatically versus what still requires a manual step
+   (e.g., a teammate installing this on a different machine still follows the README).
 
 ## Quality Gate
 
@@ -119,6 +131,8 @@ Before writing the final files, silently check:
   kind of piece — and it's not split into unnecessary pieces when one skill would have covered it.
 - The bundle's `README.md` actually explains how a teammate turns the harness on, not just what it
   does.
+- Whatever was safely automatable got activated now, for the current user — the harness isn't left
+  working only "on paper" in the README while nothing actually runs yet.
 - If a parent `CLAUDE.md` exists (Step 0), the bundle was placed according to the scope the user
   actually chose — not defaulted to the child repo just because that's where the session started.
 
