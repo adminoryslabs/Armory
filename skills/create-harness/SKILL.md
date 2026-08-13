@@ -1,19 +1,23 @@
 ---
 name: create-harness
-description: Guía al usuario, paso a paso y con preguntas, para diseñar y empaquetar su propio harness (skill instalable) para una tarea recurrente de su proyecto — revisión de deuda técnica, seguridad, despliegue, bug fixing, lo que necesite. Use when the user wants to build their own lightweight harness/skill for a recurring project task, or asks how to package a repeatable agent workflow as an installable skill.
+description: Guía al usuario, paso a paso y con preguntas, para diseñar su propio harness — un flujo de trabajo chico y de un solo propósito, armado con la combinación de skills, reglas o hooks que la tarea realmente necesite — para una tarea recurrente de su proyecto: revisión de deuda técnica, seguridad, despliegue, bug fixing, lo que necesite. Use when the user wants to build their own lightweight harness/workflow for a recurring project task, or asks how to package a repeatable agent process from skills, rules, and hooks.
 ---
 
 # Harness Builder (Interactive)
 
 ## Goal
 
-Guide the user through designing and packaging a **small, single-purpose harness** for a
-recurring task on their own project — a debt review, a security check, a deploy checklist, a
-bug-fixing routine, or anything else that follows a repeatable process. The output is an
-installable `SKILL.md`, using the same convention as every other skill in this catalog, so a
-teammate joining the project later can install it and get the same repeatable process.
+Guide the user through designing a **small, single-purpose harness** for a recurring task on
+their own project — a debt review, a security check, a deploy checklist, a bug-fixing routine, or
+anything else that follows a repeatable process.
 
-**This skill is conversational, not one-shot.** Never assemble the final `SKILL.md` from a single
+**A harness is not a single skill.** It's a small workflow, built from whichever combination of
+pieces the task actually needs: a skill (something the agent runs on request), a rule (context the
+agent should always have, added to `CLAUDE.md`), a hook (something that must execute automatically
+at a specific event, not just be read), or occasionally a dedicated sub-agent. Most small harnesses
+need only one or two of these — do not reach for all of them by default.
+
+**This skill is conversational, not one-shot.** Never assemble the final harness from a single
 guess at what the user wants. Walk through each decision below one at a time, and write nothing
 until the user has actually answered it.
 
@@ -45,35 +49,56 @@ ask them to pick ONE concern for this pass. They can run this skill again later 
 4. **Output format.** Ask what the harness should produce each time it runs — a written report, a
    pass/fail checklist, inline findings, a file written to a specific path. Get a concrete shape,
    not "a summary."
-5. **Guardrails.** Ask explicitly: "Is there anything this harness should never do without asking
-   you first?" If the user names something, encode it as an explicit stop-and-ask condition inside
-   the Workflow section of the resulting skill — not as a passing mention in prose. If the user says
-   no, skip this without inventing a guardrail they didn't ask for.
-6. **Assemble and write** `skills/{harness-slug}/SKILL.md` in the user's own project, following the
-   same frontmatter convention as this catalog:
+5. **Guardrails, and how to enforce each one.** Ask explicitly: "Is there anything this harness
+   should never do without asking you first?" For each one the user names, decide together which
+   kind of enforcement it actually needs:
+   - **Hard rule → hook.** If it must never be skipped or forgotten, it needs a hook that executes
+     at the right event (e.g., before a commit, before a deploy command runs) — an instruction in a
+     rules file can be read and ignored, a hook cannot.
+   - **Soft expectation → rule or a step inside the workflow.** If it's a "should remember" rather
+     than a "must never", a line in `CLAUDE.md` or a step in the workflow below is enough.
+   If the user says there's nothing like that, skip this without inventing a guardrail they didn't
+   ask for.
+6. **Choose the pieces.** For each part of the workflow defined in steps 3-5, decide the smallest
+   mechanism that does the job — do not default to "make it a skill" for everything:
+   - A **skill** (`SKILL.md`) for a task the agent performs on request, following the steps from
+     step 3.
+   - A **rule** (an addition to the project's `CLAUDE.md` or rules file) for context the agent
+     should always have without being asked.
+   - A **hook** for anything identified in step 5 as a hard rule — it has to execute, not just be
+     read.
+   - A dedicated **sub-agent** only if the task genuinely needs isolated context — rare for a small,
+     single-purpose harness. If the user reaches for this without a concrete reason, ask why a skill
+     isn't enough first.
+7. **Assemble everything into one small bundle**, e.g. `harnesses/{harness-slug}/` in the user's own
+   project, with:
+   - Whichever combination of `SKILL.md`, a rules snippet, and/or hook config the previous step
+     decided on.
+   - A short `README.md` at the root of that folder explaining, in plain language: what this
+     harness does, which pieces it's made of and what each one is for, and the steps a teammate
+     needs to take to turn it on in their own setup (install the skill, add the rule to their
+     `CLAUDE.md`, register the hook — whatever applies).
 
-   ```yaml
-   ---
-   name: {harness-slug}
-   description: {short description in the project's language} Use when {trigger condition in English}.
-   ---
-   ```
-
-   The body (Goal, Input, Workflow, Quality Gate) is written in English, matching the convention of
-   every other skill in this catalog, so it stays consistent if it's ever published or shared.
+   Any `SKILL.md` inside the bundle follows this catalog's frontmatter convention (`name`,
+   `description` ending in an English "Use when..." clause) so it stays consistent if it's ever
+   published or shared on its own.
 
 ## Quality Gate
 
-Before writing the final file, silently check:
+Before writing the final files, silently check:
 
 - The harness has exactly one clear purpose — not several concerns bundled together.
-- Every workflow step came from the user's actual answer, not invented to fill a gap.
+- Every workflow step and every guardrail came from the user's actual answer, not invented to fill
+  a gap.
 - The output format is concrete enough that two different runs would produce comparably shaped
   results.
-- Any guardrail the user named is an explicit stop-and-ask condition in the Workflow, not just
-  mentioned once and forgotten.
-- The frontmatter matches the same convention as the rest of the catalog — so it could be installed
-  the same way as any other skill if the user chooses to share it later.
+- Nothing the user marked as a hard rule ended up as a soft instruction (a "please remember to..."
+  line) instead of a hook — and nothing the user marked as a soft expectation was over-engineered
+  into a hook it didn't need.
+- The harness is not forced into a single skill file when the task genuinely needed more than one
+  kind of piece — and it's not split into unnecessary pieces when one skill would have covered it.
+- The bundle's `README.md` actually explains how a teammate turns the harness on, not just what it
+  does.
 
 ## After this skill
 
