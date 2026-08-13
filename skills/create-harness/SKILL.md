@@ -26,6 +26,29 @@ a harness, it's a wish list — it will drift, contradict itself, and be too vag
 an agent. If the user proposes something broad (security AND debt AND deploy, all in one), stop and
 ask them to pick ONE concern for this pass. They can run this skill again later for the next one.
 
+**This is for lightweight harnesses only — not a substitute for a full SDD/multi-agent system.**
+If what the user describes actually needs multiple phases, gatekeeping, or dual review (the kind of
+thing gentle-ai's SDD harness already does), say so directly instead of trying to rebuild something
+equivalent here from scratch. This skill builds the small, single-purpose layer underneath that —
+the everyday, low-risk repeatable task, not the heavy machinery.
+
+## Step 0 — Repo context
+
+Before anything else, check whether this project is part of a multirepo ecosystem (see session 10):
+look for a `CLAUDE.md` one folder above the current one.
+
+- **No parent `CLAUDE.md` found:** this is a single-repo project. Proceed directly to Input below,
+  using only this repo's own `CLAUDE.md` as context.
+- **Parent `CLAUDE.md` found:** ask the user whether this harness needs to operate on just this repo,
+  or needs to coordinate across repos (e.g., a deploy checklist that touches both an API and a web
+  client).
+  - **Single-repo scope:** read this repo's own `CLAUDE.md` as context and proceed normally — the
+    parent structure doesn't change anything else below.
+  - **Cross-repo scope:** also read the parent `CLAUDE.md`, and treat Context (step 2) and Workflow
+    (step 3) as potentially spanning more than one repo. In that case, the bundle from step 7 belongs
+    in the parent folder (e.g. `harnesses/{slug}/`), not inside a single child repo, so any repo that
+    needs it can find it.
+
 ## Input
 
 - A description, in the user's own words, of the recurring task this harness should handle —
@@ -99,6 +122,8 @@ Before writing the final files, silently check:
   kind of piece — and it's not split into unnecessary pieces when one skill would have covered it.
 - The bundle's `README.md` actually explains how a teammate turns the harness on, not just what it
   does.
+- If a parent `CLAUDE.md` exists (Step 0), the bundle was placed according to the scope the user
+  actually chose — not defaulted to the child repo just because that's where the session started.
 
 ## After this skill
 
