@@ -25,12 +25,9 @@ until the user has actually answered it.
 a harness, it's a wish list — it will drift, contradict itself, and be too vague to actually guide
 an agent. If the user proposes something broad (security AND debt AND deploy, all in one), stop and
 ask them to pick ONE concern for this pass. They can run this skill again later for the next one.
-
-**This is for lightweight harnesses only — not a substitute for a full SDD/multi-agent system.**
-If what the user describes actually needs multiple phases, gatekeeping, or dual review (the kind of
-thing gentle-ai's SDD harness already does), say so directly instead of trying to rebuild something
-equivalent here from scratch. This skill builds the small, single-purpose layer underneath that —
-the everyday, low-risk repeatable task, not the heavy machinery.
+Scope discipline is about a single clear purpose per pass, not about capping how complete or
+substantial the resulting harness ends up being — a harness can end up with several pieces and real
+depth if the task genuinely needs it.
 
 ## Step 0 — Repo context
 
