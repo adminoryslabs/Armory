@@ -92,16 +92,19 @@ look for a `CLAUDE.md` one folder above the current one.
      isn't enough first.
 7. **Assemble everything into one small bundle**, e.g. `harnesses/{harness-slug}/` in the user's own
    project, with:
-   - Whichever combination of `SKILL.md`, a rules snippet, and/or hook config the previous step
-     decided on.
+   - Whichever combination of `SKILL.md`, a rules snippet, hook config, and/or sub-agent definition
+     the previous step decided on.
    - A short `README.md` at the root of that folder explaining, in plain language: what this
      harness does, which pieces it's made of and what each one is for, and the steps a teammate
      needs to take to turn it on in their own setup (install the skill, add the rule to their
-     `CLAUDE.md`, register the hook — whatever applies).
+     `CLAUDE.md`, register the hook, copy the sub-agent definition — whatever applies).
 
    Any `SKILL.md` inside the bundle follows this catalog's frontmatter convention (`name`,
    `description` ending in an English "Use when..." clause) so it stays consistent if it's ever
-   published or shared on its own.
+   published or shared on its own. Any sub-agent definition follows the project's own sub-agent
+   convention (frontmatter with `name`, `description`, and the tools it's scoped to) — this is
+   the heaviest piece a small harness can have, so keep its scope as narrow as the one purpose
+   from step 1, same as everything else in the bundle.
 8. **Activate it for the person who just built it.** The README from step 7 is written for a
    teammate setting this up later on their own machine — it does not, by itself, make the harness
    work right now for the user in this session. Do everything that's safely automatable immediately:
@@ -110,6 +113,9 @@ look for a `CLAUDE.md` one folder above the current one.
      drop any hook entries already there).
    - If a rule was decided in step 6, add it to the current project's `CLAUDE.md` now, not just
      describe it in the README.
+   - If a sub-agent was decided in step 6, place its definition file where this project's setup
+     actually discovers sub-agents (e.g. `.claude/agents/`), not only inside the harness bundle
+     folder — otherwise it exists on disk but isn't invocable.
    - If the skill needs to live somewhere specific to be discoverable in this project (not just
      inside the harness bundle folder), put it there too.
    Tell the user exactly what got activated automatically versus what still requires a manual step
@@ -129,6 +135,9 @@ Before writing the final files, silently check:
   into a hook it didn't need.
 - The harness is not forced into a single skill file when the task genuinely needed more than one
   kind of piece — and it's not split into unnecessary pieces when one skill would have covered it.
+- If a sub-agent was chosen, it earned its place (genuine need for isolated context, not reached
+  for by default) and it's actually placed where this project discovers sub-agents, not just
+  described in the README.
 - The bundle's `README.md` actually explains how a teammate turns the harness on, not just what it
   does.
 - Whatever was safely automatable got activated now, for the current user — the harness isn't left
