@@ -114,7 +114,14 @@ For each block that actually applies to this project, decide and justify a concr
 - **Data & migrations** — schema changes, backward compatibility, migration ordering, zero-downtime
   strategy if needed. State explicitly: a code rollback does not automatically mean a data rollback
 - **Deploy gates** — what must pass before a release is allowed (tests, security checks, build
-  success)
+  success). A gate that only runs as an informational CI check alongside a platform's own
+  auto-deploy-on-push is not a gate — a red check and a live deploy can both exist at once. If the
+  target platform (Render, Vercel, Netlify, and similar PaaS) supports disabling its native
+  auto-deploy and exposes a deploy hook (a URL that triggers a deploy on demand), design the real
+  gate as: disable auto-deploy-on-push on the platform, then let CI trigger the deploy hook only
+  after its checks pass. Check for that capability before settling for a weaker check-only design.
+  If the platform truly cannot be gated this way, say so explicitly in the plan instead of quietly
+  downgrading to an informational check.
 - **Verify & observe** — health checks and smoke tests to confirm it worked; logs/metrics/traces to
   watch afterward
 - **Recovery** — what happens if it fails: rollback, redeploy, restore infrastructure, restore
