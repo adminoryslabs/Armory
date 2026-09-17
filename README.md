@@ -21,6 +21,8 @@ npx skills add adminoryslabs/Armory --skill security-pass
 npx skills add adminoryslabs/Armory --skill deploy-pass
 npx skills add adminoryslabs/Armory --skill auditar-drift
 npx skills add adminoryslabs/Armory --skill generar-readme
+npx skills add adminoryslabs/Armory --skill init-agent
+npx skills add adminoryslabs/Armory --skill invoke-agent
 ```
 
 Para instalar todas:
@@ -42,3 +44,5 @@ npx skills add adminoryslabs/Armory --skill '*'
 - **`deploy-pass`** — analiza el proyecto real y diseña el sistema de deployment que necesita (build, artifact, config & secrets, infraestructura, estrategia de release, data & migrations, deploy gates, verify & observe, recovery), en vez de asumir una plataforma fija. Produce `DEPLOY-PLAN.md` antes de tocar nada, y nunca ejecuta una acción irreversible sin autorización explícita del usuario en ese momento.
 - **`auditar-drift`** — compara lo prometido en `PRD.md` y las ADRs contra lo que el código realmente implementa: features fantasma, reglas omitidas, decisiones de arquitectura violadas y deuda técnica. Produce `DRIFT.md` con cada hallazgo evidenciado y sus dos opciones (corregir código o actualizar la doc), sin resolver la decisión por sí misma.
 - **`generar-readme`** — genera un `README.md` pensado para un evaluador externo: quickstart real en 3 comandos, diagrama de arquitectura y stack, decisiones clave enlazadas a las ADRs, demo/video, y resumen ejecutivo del problema y los aprendizajes. Nunca inventa comandos ni links de demo — los verifica contra el proyecto real o los pide.
+- **`init-agent`** — carga en la sesión actual el playbook de un rol de equipo ágil aumentado por IA (PM, BA, UX) y adopta ese rol para el resto de la conversación, sin crear ni invocar ningún agente nuevo.
+- **`invoke-agent`** — busca en el workspace actual de herdr un agente ya despierto para el rol pedido (PM, BA, UX); si no hay ninguno, crea un pane nuevo, levanta un agente Claude en él y le carga ese rol.
