@@ -1,6 +1,6 @@
 ---
 name: invoke-agent
-description: Busca en el workspace actual de herdr un agente ya despierto para el rol pedido (PM, BA, UX); si no hay ninguno, crea un pane nuevo, levanta un agente Claude en él y le carga ese rol. Use when the user runs /invoke-agent, asks to hand off work to another agent/role, spawn a new agent, or bring a PM/BA/UX into a herdr session.
+description: Busca en el workspace actual de herdr un agente ya despierto para el rol pedido (PM, BA, UX, ARCH); si no hay ninguno, crea un pane nuevo, levanta un agente Claude en él y le carga ese rol. Use when the user runs /invoke-agent, asks to hand off work to another agent/role, spawn a new agent, or bring a PM/BA/UX/Architect into a herdr session.
 type: skill
 tags: [agentes, roles, herdr, multi-agente]
 ---
@@ -16,14 +16,14 @@ donde se está ejecutando ahora mismo, sin tocar herdr, usar `init-agent` en su 
 
 ## Roles disponibles
 
-Los mismos que `init-agent`: `PM`, `BA`, `UX` (`references/PLAYBOOK-<ROL>.md`). Convención de
-nombre de agente en herdr: el rol en minúscula (`pm`, `ba`, `ux`).
+Los mismos que `init-agent`: `PM`, `BA`, `UX`, `ARCH` (`references/PLAYBOOK-<ROL>.md`). Convención
+de nombre de agente en herdr: el rol en minúscula (`pm`, `ba`, `ux`, `arch`).
 
 ## Input
 
-Un parámetro de rol (`PM`, `BA` o `UX`), case-insensitive. Ejemplo: `/invoke-agent BA`.
+Un parámetro de rol (`PM`, `BA`, `UX` o `ARCH`), case-insensitive. Ejemplo: `/invoke-agent BA`.
 
-Si no se especifica, o no matchea ninguno de los tres, preguntar cuál rol invocar y esperar
+Si no se especifica, o no matchea ninguno de los cuatro, preguntar cuál rol invocar y esperar
 respuesta. No asumir un rol por defecto.
 
 ## Workflow
@@ -33,13 +33,13 @@ respuesta. No asumir un rol por defecto.
 2. **Listar los panes del workspace actual:** `herdr pane list --workspace <workspace_id>`.
 3. **Listar los agentes vivos:** `herdr agent list`.
 4. **Cruzar ambos listados.** Buscar un agente cuyo `pane_id` esté entre los panes del workspace
-   actual (paso 2) y cuyo nombre coincida con la convención del rol pedido (`pm`/`ba`/`ux`). Un
+   actual (paso 2) y cuyo nombre coincida con la convención del rol pedido (`pm`/`ba`/`ux`/`arch`). Un
    agente despierto con el rol correcto pero en **otro** workspace no cuenta — se ignora.
    - **Si existe** en el workspace actual → es el destinatario. Ir al paso 6.
    - **Si no existe** en el workspace actual → ir al paso 5.
 5. **Crear un agente nuevo en el workspace actual**, con el comando más simple disponible (no
    crear un workspace nuevo si ya hay uno activo):
-   1. Si el nombre del rol (`pm`/`ba`/`ux`) ya está tomado por un agente vivo en otro workspace
+   1. Si el nombre del rol (`pm`/`ba`/`ux`/`arch`) ya está tomado por un agente vivo en otro workspace
       (visible en el listado del paso 3), elegir un nombre libre agregando un sufijo numérico
       (`ba-2`, `ba-3`, ...) — herdr exige nombres únicos entre agentes vivos, sin importar el
       workspace.
