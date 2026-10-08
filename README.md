@@ -23,6 +23,7 @@ npx skills add adminoryslabs/Armory --skill auditar-drift
 npx skills add adminoryslabs/Armory --skill generar-readme
 npx skills add adminoryslabs/Armory --skill init-agent
 npx skills add adminoryslabs/Armory --skill invoke-agent
+npx skills add adminoryslabs/Armory --skill playwright-e2e-test
 ```
 
 Para instalar todas:
@@ -46,3 +47,4 @@ npx skills add adminoryslabs/Armory --skill '*'
 - **`generar-readme`** — genera un `README.md` pensado para un evaluador externo: quickstart real en 3 comandos, diagrama de arquitectura y stack, decisiones clave enlazadas a las ADRs, demo/video, y resumen ejecutivo del problema y los aprendizajes. Nunca inventa comandos ni links de demo — los verifica contra el proyecto real o los pide.
 - **`init-agent`** — carga en la sesión actual el playbook de un rol de equipo ágil aumentado por IA (PM, BA, UX, ARCH) y adopta ese rol para el resto de la conversación, sin crear ni invocar ningún agente nuevo.
 - **`invoke-agent`** — busca en el workspace actual de herdr un agente ya despierto para el rol pedido (PM, BA, UX, ARCH); si no hay ninguno, crea un pane nuevo, levanta un agente Claude en él y le carga ese rol.
+- **`playwright-e2e-test`** — escribe y corre un test e2e de Playwright para un único flujo crítico, para que el agente verifique su trabajo en un navegador real en vez de afirmar que funciona. Propone el plan en lenguaje natural antes de escribir código, reutiliza el setup existente o instala uno mínimo, demuestra que el test puede fallar y, si falla, reporta con evidencia sin tocar el test para que pase: el humano decide.
