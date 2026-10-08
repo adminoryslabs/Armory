@@ -58,7 +58,15 @@ harness.
 
 ```bash
 npm install -D @playwright/test
-npx playwright install chromium        # on Linux/WSL: npx playwright install --with-deps chromium
+npx playwright install chromium
+```
+
+On Linux or WSL the browser also needs system libraries (otherwise it fails with errors like
+`libnspr4.so: cannot open shared object file`). Installing them requires `sudo`, so ask the user to
+run it — never try to obtain their password:
+
+```bash
+sudo npx playwright install-deps chromium
 ```
 
 And create `playwright.config.js` (`.ts` if the project uses TypeScript) with only what matters:
@@ -129,7 +137,8 @@ If the test failed, add:
 
 ```
 - What failed: <step and assertion>
-- Evidence: <screenshot / trace paths; open with `npx playwright show-trace <trace.zip>`>
+- Evidence: <screenshot, `error-context.md` and trace paths under `test-results/`; open the trace
+  with `npx playwright show-trace <trace.zip>` — its network tab shows the API status codes>
 - Diagnosis: app bug | outdated test | environment (server down, data) — with the reasoning
 - Proposed fix: <what to change, and where>
 ```
