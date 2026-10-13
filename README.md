@@ -24,6 +24,15 @@ npx skills add adminoryslabs/Armory --skill generar-readme
 npx skills add adminoryslabs/Armory --skill init-agent
 npx skills add adminoryslabs/Armory --skill invoke-agent
 npx skills add adminoryslabs/Armory --skill playwright-e2e-test
+npx skills add adminoryslabs/Armory --skill preparar-sprint0
+npx skills add adminoryslabs/Armory --skill veredicto
+npx skills add adminoryslabs/Armory --skill crear-guardrail
+```
+
+Para instalar el **harness de construcción** (equipo LEAD · TESTER · DEV) en un solo paso:
+
+```bash
+npx skills add adminoryslabs/Armory --skill init-agent invoke-agent preparar-sprint0 veredicto crear-guardrail -y
 ```
 
 Para instalar todas:
@@ -45,6 +54,9 @@ npx skills add adminoryslabs/Armory --skill '*'
 - **`deploy-pass`** — analiza el proyecto real y diseña el sistema de deployment que necesita (build, artifact, config & secrets, infraestructura, estrategia de release, data & migrations, deploy gates, verify & observe, recovery), en vez de asumir una plataforma fija. Produce `DEPLOY-PLAN.md` antes de tocar nada, y nunca ejecuta una acción irreversible sin autorización explícita del usuario en ese momento.
 - **`auditar-drift`** — compara lo prometido en `PRD.md` y las ADRs contra lo que el código realmente implementa: features fantasma, reglas omitidas, decisiones de arquitectura violadas y deuda técnica. Produce `DRIFT.md` con cada hallazgo evidenciado y sus dos opciones (corregir código o actualizar la doc), sin resolver la decisión por sí misma.
 - **`generar-readme`** — genera un `README.md` pensado para un evaluador externo: quickstart real en 3 comandos, diagrama de arquitectura y stack, decisiones clave enlazadas a las ADRs, demo/video, y resumen ejecutivo del problema y los aprendizajes. Nunca inventa comandos ni links de demo — los verifica contra el proyecto real o los pide.
-- **`init-agent`** — carga en la sesión actual el playbook de un rol de equipo ágil aumentado por IA (PM, BA, UX, ARCH) y adopta ese rol para el resto de la conversación, sin crear ni invocar ningún agente nuevo.
-- **`invoke-agent`** — busca en el workspace actual de herdr un agente ya despierto para el rol pedido (PM, BA, UX, ARCH); si no hay ninguno, crea un pane nuevo, levanta un agente Claude en él y le carga ese rol.
+- **`init-agent`** — carga en la sesión actual el playbook de un rol de equipo ágil aumentado por IA (PM, BA, UX, ARCH, LEAD, TESTER, DEV) y adopta ese rol para el resto de la conversación, sin crear ni invocar ningún agente nuevo.
+- **`invoke-agent`** — busca en el workspace actual de herdr un agente ya despierto para el rol pedido (PM, BA, UX, ARCH, LEAD, TESTER, DEV); si no hay ninguno, crea un pane nuevo, levanta un agente en él y le carga ese rol. Soporta el aviso de vuelta (`ENTREGA <ROL>`) para que el invocador sepa cuándo terminó.
 - **`playwright-e2e-test`** — escribe y corre un test e2e de Playwright para un único flujo crítico, para que el agente verifique su trabajo en un navegador real en vez de afirmar que funciona. Propone el plan en lenguaje natural antes de escribir código, reutiliza el setup existente o instala uno mínimo, demuestra que el test puede fallar y, si falla, reporta con evidencia sin tocar el test para que pase: el humano decide.
+- **`preparar-sprint0`** — prepara el Sprint 0 (walking skeleton) a partir del Tech Design y los ADRs: separa ADRs transversales de los de historia, define qué rutas son de cada rol según el stack, escribe la Definition of Done del esqueleto y un plan, y se detiene para aprobación humana. No construye nada.
+- **`veredicto`** — cuando TESTER y DEV entregan, corre las pruebas del TESTER contra el código del DEV, verifica la spec punto por punto con evidencia (o `NO VERIFICADO`), comprueba que cada rol tocó solo sus rutas y decide a quién se devuelve cada rojo.
+- **`crear-guardrail`** — crea un guardrail o hook en el agente que se esté usando (Claude Code, OpenCode, Codex, Antigravity u otro): detecta qué agente es, consulta su documentación vigente, propone, espera aprobación, lo configura de forma nativa y lo prueba provocando el evento.
