@@ -27,12 +27,13 @@ npx skills add adminoryslabs/Armory --skill playwright-e2e-test
 npx skills add adminoryslabs/Armory --skill preparar-sprint0
 npx skills add adminoryslabs/Armory --skill veredicto
 npx skills add adminoryslabs/Armory --skill crear-guardrail
+npx skills add adminoryslabs/Armory --skill escribir-contrato
 ```
 
 Para instalar el **harness de construcción** (equipo LEAD · TESTER · DEV) en un solo paso:
 
 ```bash
-npx skills add adminoryslabs/Armory --skill init-agent invoke-agent preparar-sprint0 veredicto crear-guardrail -y
+npx skills add adminoryslabs/Armory --skill init-agent invoke-agent preparar-sprint0 veredicto crear-guardrail escribir-contrato -y
 ```
 
 Para instalar todas:
@@ -58,5 +59,6 @@ npx skills add adminoryslabs/Armory --skill '*'
 - **`invoke-agent`** — busca en el workspace actual de herdr un agente ya despierto para el rol pedido (PM, BA, UX, ARCH, LEAD, TESTER, DEV); si no hay ninguno, crea un pane nuevo, levanta un agente en él y le carga ese rol. Soporta el aviso de vuelta (`ENTREGA <ROL>`) para que el invocador sepa cuándo terminó.
 - **`playwright-e2e-test`** — escribe y corre un test e2e de Playwright para un único flujo crítico, para que el agente verifique su trabajo en un navegador real en vez de afirmar que funciona. Propone el plan en lenguaje natural antes de escribir código, reutiliza el setup existente o instala uno mínimo, demuestra que el test puede fallar y, si falla, reporta con evidencia sin tocar el test para que pase: el humano decide.
 - **`preparar-sprint0`** — prepara el Sprint 0 (walking skeleton) a partir del Tech Design y los ADRs: separa ADRs transversales de los de historia, define qué rutas son de cada rol según el stack, escribe la Definition of Done del esqueleto y un plan, y se detiene para aprobación humana. No construye nada.
-- **`veredicto`** — cuando TESTER y DEV entregan, corre las pruebas del TESTER contra el código del DEV, verifica la spec punto por punto con evidencia (o `NO VERIFICADO`), comprueba que cada rol tocó solo sus rutas y decide a quién se devuelve cada rojo.
+- **`veredicto`** — cuando TESTER y DEV entregan, corre las pruebas del TESTER contra el código del DEV, verifica la spec punto por punto con evidencia (o `NO VERIFICADO`), comprueba que cada rol tocó solo sus rutas y arbitra cada rojo con el contrato en la mano (se apartó el código, se apartó la prueba o el contrato no lo decía), produciendo la matriz de trazabilidad para el PR.
 - **`crear-guardrail`** — crea un guardrail o hook en el agente que se esté usando (Claude Code, OpenCode, Codex, Antigravity u otro): detecta qué agente es, consulta su documentación vigente, propone, espera aprobación, lo configura de forma nativa y lo prueba provocando el evento.
+- **`escribir-contrato`** — escribe el contrato observable de una HU (entrada, salida por caso, errores, nombres que no se negocian, origen de cada línea) para que TESTER y DEV trabajen al mismo tiempo sin verse; lista las decisiones que la HU no tomaba y se detiene para aprobación humana.
