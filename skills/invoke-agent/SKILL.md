@@ -57,6 +57,20 @@ asumir un rol por defecto.
 7. Confirmar al usuario, en una línea, si se reusó un agente existente o se creó uno nuevo, y su
    `pane_id`/nombre.
 
+## Mensajes entre agentes
+
+Los avisos entre agentes llevan un **prefijo fijo**, para que el receptor sepa qué hacer sin
+interpretar el texto. El mensaje solo señala: el contenido vive en archivos del proyecto.
+
+| Prefijo | De → a | Cuándo |
+|---|---|---|
+| `ENTREGA <ROL>` | TESTER / DEV → LEAD | Terminó su parte de la unidad de trabajo |
+| `CONTEXTO TÉCNICO LISTO` | ARCH → BA | El humano aprobó el contexto técnico de un sistema existente |
+| `GLOSARIO: TÉRMINOS NUEVOS` | BA → ARCH | Hay términos del glosario sin ubicación en el código |
+| `GLOSARIO COMPLETO` | ARCH → BA | Ubicaciones completadas |
+
+Máximo dos vueltas por el mismo desacuerdo entre dos agentes; después decide el humano.
+
 ## Notas
 
 - Depende de que `init-agent` esté instalado en el mismo entorno del agente invocado. Si no lo

@@ -28,12 +28,22 @@ npx skills add adminoryslabs/Armory --skill preparar-sprint0
 npx skills add adminoryslabs/Armory --skill veredicto
 npx skills add adminoryslabs/Armory --skill crear-guardrail
 npx skills add adminoryslabs/Armory --skill escribir-contrato
+npx skills add adminoryslabs/Armory --skill contextualizar-repo
+npx skills add adminoryslabs/Armory --skill contextualizar-negocio
+npx skills add adminoryslabs/Armory --skill escribir-hus
+npx skills add adminoryslabs/Armory --skill audit-agent-context
 ```
 
 Para instalar el **harness de construcción** (equipo LEAD · TESTER · DEV) en un solo paso:
 
 ```bash
 npx skills add adminoryslabs/Armory --skill init-agent invoke-agent preparar-sprint0 veredicto crear-guardrail escribir-contrato -y
+```
+
+Para **contextualizar un sistema existente** (brownfield) con ARCH y BA:
+
+```bash
+npx skills add adminoryslabs/Armory --skill init-agent invoke-agent contextualizar-repo contextualizar-negocio audit-agent-context -y
 ```
 
 Para instalar todas:
@@ -61,4 +71,8 @@ npx skills add adminoryslabs/Armory --skill '*'
 - **`preparar-sprint0`** — prepara el Sprint 0 (walking skeleton) a partir del Tech Design y los ADRs: separa ADRs transversales de los de historia, define qué rutas son de cada rol según el stack, escribe la Definition of Done del esqueleto y un plan, y se detiene para aprobación humana. No construye nada.
 - **`veredicto`** — cuando TESTER y DEV entregan, corre las pruebas del TESTER contra el código del DEV, verifica la spec punto por punto con evidencia (o `NO VERIFICADO`), comprueba que cada rol tocó solo sus rutas y arbitra cada rojo con el contrato en la mano (se apartó el código, se apartó la prueba o el contrato no lo decía), produciendo la matriz de trazabilidad para el PR.
 - **`crear-guardrail`** — crea un guardrail o hook en el agente que se esté usando (Claude Code, OpenCode, Codex, Antigravity u otro): detecta qué agente es, consulta su documentación vigente, propone, espera aprobación, lo configura de forma nativa y lo prueba provocando el evento.
+- **`contextualizar-repo`** — contextualiza un sistema existente (brownfield) para trabajar AI-first sobre él: arranque y pruebas verificados, índice de CodeGraph, mapa de capas, decisiones heredadas como ADR, catálogo de patrones (canon vs. legado), mapa de deuda y reglas de construcción verificables, todo con evidencia. La usa el ARCH. Nunca modifica código.
+- **`audit-agent-context`** — audita si `AGENTS.md` y/o `CLAUDE.md` siguen reflejando la realidad del repo (estructura, comandos, convenciones, alcance) y reporta discrepancias sin editarlos.
+- **`escribir-hus`** — convierte un PRD en Historias de Usuario construibles sin adivinar: una HU por funcionalidad del alcance, Como/Quiero/Para con al menos dos escenarios Gherkin, conflictos del PRD documentados y puntos abiertos como preguntas exactas al negocio. La usa el BA.
+- **`contextualizar-negocio`** — documenta el contexto funcional de un sistema existente: mapa de capacidades, reglas de negocio escondidas en el código y glosario negocio ↔ código, en coordinación con el ARCH. La usa el BA. Nunca modifica código.
 - **`escribir-contrato`** — escribe el contrato observable de una HU (entrada, salida por caso, errores, nombres que no se negocian, origen de cada línea) para que TESTER y DEV trabajen al mismo tiempo sin verse; lista las decisiones que la HU no tomaba y se detiene para aprobación humana.
