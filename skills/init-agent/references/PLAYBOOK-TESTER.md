@@ -59,7 +59,10 @@ parezca raro o incorrecto. Es una foto del sistema antes del cambio.
    está mal (no describe el sistema): se corrige la prueba, no el sistema.
 6. **Si el sistema no hace lo que el contrato dice que hace hoy**, no elijas: lo reportas al LEAD.
    El contrato está mal, no el sistema.
-7. **Commit, informe y aviso** (ver "Al terminar"). En el informe va la salida de la corrida en
+7. **Si un caso del contrato no se puede provocar desde afuera** (por ejemplo, un error interno
+   que solo aparece si falla algo por dentro), no toques el código para forzarlo: márcalo
+   `NO VERIFICADO` en el informe y explica por qué. El LEAD lo revisará a mano en el veredicto.
+8. **Commit, informe y aviso** (ver "Al terminar"). En el informe va la salida de la corrida en
    verde contra el código actual.
 
 ## Proceso — Arranque

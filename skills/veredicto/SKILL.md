@@ -79,6 +79,13 @@ Si falta una entrega, **no se dicta veredicto**: se espera.
    - **Pruebas existentes del proyecto:** los comandos que lista el contrato, en verde.
    Una prueba de caracterización en rojo **después** del cambio significa que el refactor cambió
    algo observable: casi siempre **se apartó el código**.
+   - **Si el contrato describía mal el comportamiento de hoy** (la foto del TESTER muestra otra
+     cosa), manda la foto: el LEAD corrige el contrato, sube la versión y la lleva al gate humano.
+     No corrige ningún agente.
+   - **Casos `NO VERIFICADO`** (no se podían provocar desde afuera): revisar en el diff cómo se
+     comportaba ese caso antes y después. Si cambió algo observable, por chico que sea (un
+     mensaje, un campo), **se escala al humano** con dos opciones: aceptarlo en un contrato v2 o
+     restaurar el comportamiento anterior.
 
 9. **MEJOR — la mejora medida.** Repetir la medición que define el contrato (comando, búsqueda,
    CodeGraph, diff) y comparar con el valor de "hoy". Se mide, no se acepta lo que dice el informe

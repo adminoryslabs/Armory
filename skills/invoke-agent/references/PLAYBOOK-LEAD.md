@@ -66,6 +66,7 @@ Si no queda claro de qué tipo es la tarea, preguntar antes de seguir.
 
 6. **Si es una feature o un refactor**, usar `escribir-contrato` para producir
    `contratos/CONTRATO-<ID>.md` (`<ID>` = id de la HU, del ítem de deuda o un nombre corto).
+   Si `AGENTS.md` indica otra carpeta para contratos e informes, usar esa.
    Si `AGENTS.md` no define qué rutas son del TESTER y cuáles del DEV, el contrato las propone.
    Si la skill no está disponible, pedir al usuario que la instale
    (`npx skills add adminoryslabs/Armory --skill escribir-contrato`).
