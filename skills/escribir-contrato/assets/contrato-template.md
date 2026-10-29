@@ -1,8 +1,9 @@
-# CONTRATO — <HU-ID> <Título de la HU>
+# CONTRATO — <ID> <Título>
 
+**Tipo:** Feature
 **Versión:** v1
 **Estado:** Pendiente de aprobación | Aprobado (<fecha>, <quién>)
-**HU:** <enlace o ruta>
+**Origen:** <HU (enlace o ruta) o pedido>
 
 ---
 
@@ -44,7 +45,19 @@
 | Campo | ... |
 | Mensaje | ... |
 
-## Decisiones propuestas (no venían en la HU)
+## Rutas de cada rol
+
+| Rol | Rutas | Origen |
+|---|---|---|
+| TESTER | ... | AGENTS.md / DECISIÓN PROPUESTA |
+| DEV | ... | AGENTS.md / DECISIÓN PROPUESTA |
+
+## Avisos de contexto
+
+- Deuda en la zona del cambio (`DEUDA.md`): <ninguna / ítem + por qué conviene resolverla antes>
+- Patrones aplicables (`PATRONES.md`): <canon a imitar>
+
+## Decisiones propuestas (no venían en la tarea)
 
 | # | Decisión | Por qué hace falta | Estado |
 |---|---|---|---|
